@@ -71,3 +71,22 @@ VITE_API_BASE_URL=https://your-render-backend-url.onrender.com
 ## Notes
 
 The cloud requirements exclude local Whisper and Torch to keep deployment lightweight. Audio upload works best in cloud with AssemblyAI. Pasted transcript analysis works with Gemini alone.
+
+## Render Frontend Static Site Settings
+
+If you create the frontend manually on Render, use these exact settings:
+
+```bash
+Service Type: Static Site
+Root Directory: frontend
+Build Command: npm ci && npm run build
+Publish Directory: dist
+```
+
+Environment variable:
+
+```env
+VITE_API_BASE_URL=https://your-render-backend-url.onrender.com
+```
+
+Do not run `npm ci` from the repository root. The frontend `package-lock.json` lives inside `frontend/`.
