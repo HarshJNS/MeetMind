@@ -496,21 +496,42 @@ function LandingPage({ onEnterApp }) {
         </div>
         <div className="landing-preview" aria-label="MeetMind product preview">
           <div className="preview-sidebar">
-            <span />
-            <span />
-            <span />
+            <span>Analyze</span>
+            <span>Memory</span>
+            <span>Archive</span>
           </div>
           <div className="preview-main">
-            <div className="preview-topline" />
+            <div className="preview-topline">
+              <span>Weekly Ops Sync</span>
+              <strong>Positive</strong>
+            </div>
             <div className="preview-cards">
-              <div />
-              <div />
-              <div />
+              <div>
+                <strong>4</strong>
+                <span>Decisions</span>
+              </div>
+              <div>
+                <strong>7</strong>
+                <span>Action Items</span>
+              </div>
+              <div>
+                <strong>2</strong>
+                <span>Open Questions</span>
+              </div>
             </div>
             <div className="preview-panel">
-              <div className="preview-row long" />
-              <div className="preview-row" />
-              <div className="preview-row short" />
+              <div className="preview-decision">
+                <CheckCircle2 size={16} />
+                <span>Move vendor pricing review to Friday.</span>
+              </div>
+              <div className="preview-task">
+                <strong>Priya</strong>
+                <span>Send revised onboarding plan by tomorrow.</span>
+              </div>
+              <div className="preview-memory">
+                <SearchCheck size={16} />
+                <span>Ask: What did we decide about the Q3 budget?</span>
+              </div>
             </div>
           </div>
         </div>
