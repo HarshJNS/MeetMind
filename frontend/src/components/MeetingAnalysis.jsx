@@ -145,16 +145,18 @@ export default function MeetingAnalysis({ result, onBack }) {
 
       {/* Quick metrics grid */}
       <div className="metrics-grid">
-        <div className="glass-panel metric-card">
+        <div className="glass-panel metric-card" style={{ position: "relative" }}>
           <div style={{
-            background: "rgba(16, 185, 129, 0.1)",
+            background: "rgba(16, 185, 129, 0.08)",
             color: "var(--color-success)",
-            borderRadius: "12px",
+            border: "1px solid rgba(16, 185, 129, 0.2)",
+            borderRadius: "14px",
             width: "48px",
             height: "48px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            boxShadow: "0 0 10px rgba(16, 185, 129, 0.1)"
           }}>
             <ShieldCheck size={24} />
           </div>
@@ -164,16 +166,18 @@ export default function MeetingAnalysis({ result, onBack }) {
           </div>
         </div>
 
-        <div className="glass-panel metric-card">
+        <div className="glass-panel metric-card" style={{ position: "relative" }}>
           <div style={{
-            background: "rgba(6, 182, 212, 0.1)",
+            background: "rgba(6, 182, 212, 0.08)",
             color: "var(--accent-cyan)",
-            borderRadius: "12px",
+            border: "1px solid rgba(6, 182, 212, 0.2)",
+            borderRadius: "14px",
             width: "48px",
             height: "48px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            boxShadow: "0 0 10px rgba(6, 182, 212, 0.1)"
           }}>
             <Check size={24} />
           </div>
@@ -185,16 +189,18 @@ export default function MeetingAnalysis({ result, onBack }) {
           </div>
         </div>
 
-        <div className="glass-panel metric-card">
+        <div className="glass-panel metric-card" style={{ position: "relative" }}>
           <div style={{
-            background: "rgba(245, 158, 11, 0.1)",
+            background: "rgba(245, 158, 11, 0.08)",
             color: "var(--color-warning)",
-            borderRadius: "12px",
+            border: "1px solid rgba(245, 158, 11, 0.2)",
+            borderRadius: "14px",
             width: "48px",
             height: "48px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            boxShadow: "0 0 10px rgba(245, 158, 11, 0.1)"
           }}>
             <AlertTriangle size={24} />
           </div>
@@ -207,21 +213,42 @@ export default function MeetingAnalysis({ result, onBack }) {
 
       {/* Summary block */}
       <div className="glass-panel" style={{
-        padding: "24px 32px",
+        padding: "26px 32px",
         borderLeft: "4px solid var(--accent-cyan)",
-        background: "rgba(6, 182, 212, 0.02)"
+        background: "linear-gradient(90deg, rgba(6, 182, 212, 0.035) 0%, transparent 100%)",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)"
       }}>
-        <h3 style={{ marginBottom: "12px", fontSize: "1.1rem", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--text-cyan)" }}>
+        <h3 style={{
+          marginBottom: "14px",
+          fontSize: "0.95rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.08em",
+          color: "var(--text-cyan)",
+          fontWeight: 700
+        }}>
           Executive Summary
         </h3>
-        <ul style={{ listStyleType: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+        <ul style={{ listStyleType: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
           {Array.isArray(summary) ? summary.map((line, idx) => (
-            <li key={idx} style={{ position: "relative", paddingLeft: "20px", color: "var(--text-primary)", fontSize: "1.05rem" }}>
-              <span style={{ position: "absolute", left: 0, color: "var(--accent-cyan)" }}>•</span>
+            <li key={idx} style={{
+              position: "relative",
+              paddingLeft: "24px",
+              color: "var(--text-primary)",
+              fontSize: "1.02rem",
+              lineHeight: 1.6
+            }}>
+              <span style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                color: "var(--accent-cyan)",
+                fontSize: "1.2rem",
+                lineHeight: 1
+              }}>•</span>
               {line}
             </li>
           )) : (
-            <li style={{ color: "var(--text-primary)", fontSize: "1.05rem" }}>{String(summary)}</li>
+            <li style={{ color: "var(--text-primary)", fontSize: "1.02rem" }}>{String(summary)}</li>
           )}
         </ul>
       </div>
@@ -230,41 +257,43 @@ export default function MeetingAnalysis({ result, onBack }) {
       <div className="detail-grid">
 
         {/* Left column - Accountability Insights */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
 
           {/* Decisions section */}
-          <div className="glass-panel" style={{ padding: "30px" }}>
-            <h3 style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <ShieldCheck size={20} style={{ color: "var(--color-success)" }} /> Decisions Made
+          <div className="glass-panel" style={{ padding: "32px" }}>
+            <h3 style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px", fontWeight: 700 }}>
+              <ShieldCheck size={22} style={{ color: "var(--color-success)" }} /> Decisions Made
             </h3>
             {decisions.length > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {decisions.map((decision, idx) => (
                   <div key={idx} style={{
                     display: "flex",
-                    gap: "12px",
-                    background: "rgba(16, 185, 129, 0.03)",
+                    gap: "14px",
+                    background: "rgba(16, 185, 129, 0.02)",
                     border: "1px solid rgba(16, 185, 129, 0.1)",
+                    borderLeft: "3px solid var(--color-success)",
                     borderRadius: "10px",
-                    padding: "14px 18px",
+                    padding: "16px 20px",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
                   }}>
-                    <Check size={16} style={{ color: "var(--color-success)", flexShrink: 0, marginTop: "3px" }} />
-                    <span style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>{decision}</span>
+                    <Check size={18} style={{ color: "var(--color-success)", flexShrink: 0, marginTop: "2px" }} />
+                    <span style={{ fontSize: "0.96rem", lineHeight: 1.6, color: "var(--text-primary)", fontWeight: 500 }}>{decision}</span>
                   </div>
                 ))}
               </div>
             ) : (
-              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>No explicit decisions identified in the meeting.</p>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.92rem" }}>No explicit decisions identified in the meeting.</p>
             )}
           </div>
 
           {/* Action items checklist */}
-          <div className="glass-panel" style={{ padding: "30px" }}>
-            <h3 style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <Check size={20} style={{ color: "var(--accent-cyan)" }} /> Action Items
+          <div className="glass-panel" style={{ padding: "32px" }}>
+            <h3 style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px", fontWeight: 700 }}>
+              <Check size={22} style={{ color: "var(--accent-cyan)" }} /> Action Items
             </h3>
             {actionItems.length > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {actionItems.map((item, idx) => {
                   const isChecked = checkedItems[idx];
                   const owner = item.owner || "Not specified";
@@ -273,75 +302,49 @@ export default function MeetingAnalysis({ result, onBack }) {
                   return (
                     <div key={idx}
                       onClick={() => handleToggleCheck(idx)}
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "16px",
-                        background: isChecked ? "rgba(255, 255, 255, 0.01)" : "rgba(255, 255, 255, 0.02)",
-                        border: "1px solid",
-                        borderColor: isChecked ? "rgba(255, 255, 255, 0.03)" : "var(--border-translucent)",
-                        borderRadius: "12px",
-                        padding: "16px",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        opacity: isChecked ? 0.6 : 1,
-                      }}
-                      className="glass-panel-hover"
+                      className={`checkbox-card ${isChecked ? "checked" : ""}`}
                     >
                       {/* Interactive checkbox */}
-                      <div style={{
-                        width: "22px",
-                        height: "22px",
-                        borderRadius: "6px",
-                        border: "2px solid",
-                        borderColor: isChecked ? "var(--accent-cyan)" : "var(--text-muted)",
-                        background: isChecked ? "var(--accent-cyan)" : "transparent",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginTop: "2px",
-                        flexShrink: 0,
-                        transition: "all 0.2s ease"
-                      }}>
+                      <div className="checkbox-box">
                         {isChecked && <Check size={14} style={{ color: "#000", strokeWidth: 3 }} />}
                       </div>
 
                       {/* Content */}
                       <div style={{ flexGrow: 1, display: "flex", flexDirection: "column", gap: "12px" }}>
-                        <span style={{
-                          fontSize: "0.95rem",
+                        <span className="task-text" style={{
+                          fontSize: "0.98rem",
                           lineHeight: 1.5,
-                          textDecoration: isChecked ? "line-through" : "none",
                           color: isChecked ? "var(--text-muted)" : "var(--text-primary)",
-                          fontWeight: 500
+                          fontWeight: 550
                         }}>
                           {item.task}
                         </span>
 
-                        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", alignItems: "center" }}>
                           {/* Owner badge */}
-                          <span className="badge badge-info" style={{ textTransform: "capitalize" }}>
+                          <span className="badge badge-info" style={{ textTransform: "capitalize", padding: "4px 10px" }}>
                             <div style={{
                               width: "16px",
                               height: "16px",
                               borderRadius: "50%",
-                              background: "rgba(59, 130, 246, 0.3)",
+                              background: "rgba(59, 130, 246, 0.25)",
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
                               fontSize: "7px",
-                              fontWeight: 800
+                              fontWeight: 900,
+                              color: "#fff"
                             }}>
                               {getInitials(owner)}
                             </div>
-                            <span style={{ fontSize: "0.75rem" }}>{owner}</span>
+                            <span style={{ fontSize: "0.72rem" }}>{owner}</span>
                           </span>
 
                           {/* Deadline badge */}
                           {deadline !== "Not specified" && (
-                            <span className="badge badge-warning">
+                            <span className="badge badge-warning" style={{ padding: "4px 10px" }}>
                               <Calendar size={11} />
-                              <span style={{ fontSize: "0.75rem" }}>{deadline}</span>
+                              <span style={{ fontSize: "0.72rem" }}>{deadline}</span>
                             </span>
                           )}
                         </div>
@@ -351,53 +354,55 @@ export default function MeetingAnalysis({ result, onBack }) {
                 })}
               </div>
             ) : (
-              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>No action items identified in the meeting.</p>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.92rem" }}>No action items identified in the meeting.</p>
             )}
           </div>
 
           {/* Unanswered Questions */}
-          <div className="glass-panel" style={{ padding: "30px" }}>
-            <h3 style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
-              <AlertTriangle size={20} style={{ color: "var(--color-warning)" }} /> Unanswered Questions
+          <div className="glass-panel" style={{ padding: "32px" }}>
+            <h3 style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px", fontWeight: 700 }}>
+              <AlertTriangle size={22} style={{ color: "var(--color-warning)" }} /> Unanswered Questions
             </h3>
             {questions.length > 0 ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                 {questions.map((question, idx) => (
                   <div key={idx} style={{
                     display: "flex",
-                    gap: "12px",
-                    background: "rgba(245, 158, 11, 0.03)",
+                    gap: "14px",
+                    background: "rgba(245, 158, 11, 0.02)",
                     border: "1px solid rgba(245, 158, 11, 0.1)",
+                    borderLeft: "3px solid var(--color-warning)",
                     borderRadius: "10px",
-                    padding: "14px 18px",
+                    padding: "16px 20px",
+                    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
                   }}>
-                    <span style={{ color: "var(--color-warning)", fontWeight: "bold" }}>?</span>
-                    <span style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>{question}</span>
+                    <span style={{ color: "var(--color-warning)", fontWeight: "bold", fontSize: "1.1rem", lineHeight: 1 }}>?</span>
+                    <span style={{ fontSize: "0.96rem", lineHeight: 1.6, color: "var(--text-primary)", fontWeight: 500 }}>{question}</span>
                   </div>
                 ))}
               </div>
             ) : (
-              <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>All questions identified were answered during the session.</p>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.92rem" }}>All questions identified were answered during the session.</p>
             )}
           </div>
         </div>
 
         {/* Right column - Deliverables & Transcripts */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
 
           {/* Follow-up email draft */}
-          <div className="glass-panel" style={{ padding: "30px", position: "relative" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
-              <h3 style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <FileText size={20} style={{ color: "var(--accent-purple)" }} /> Follow-up Email
+          <div className="glass-panel" style={{ padding: "32px", position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
+              <h3 style={{ display: "flex", alignItems: "center", gap: "12px", fontWeight: 700 }}>
+                <FileText size={22} style={{ color: "var(--accent-purple)" }} /> Follow-up Email
               </h3>
               <button
                 className="btn btn-secondary"
                 onClick={handleCopy}
                 style={{
-                  padding: "6px 12px",
+                  padding: "8px 14px",
                   fontSize: "0.8rem",
-                  borderRadius: "8px",
+                  borderRadius: "10px",
                   borderColor: copied ? "var(--color-success)" : "var(--border-translucent)",
                   background: copied ? "var(--color-success-bg)" : "rgba(255, 255, 255, 0.02)"
                 }}
@@ -414,20 +419,10 @@ export default function MeetingAnalysis({ result, onBack }) {
               </button>
             </div>
 
-            <div style={{
-              background: "rgba(15, 23, 42, 0.4)",
-              border: "1px solid var(--border-translucent)",
-              borderRadius: "10px",
-              padding: "18px",
-              fontFamily: "var(--font-body)",
-              fontSize: "0.9rem",
-              lineHeight: 1.6,
-              color: "var(--text-primary)",
-              whiteSpace: "pre-wrap",
-              maxHeight: "380px",
-              overflowY: "auto"
-            }}>
-              {result.email_draft}
+            <div className="scroll-fade-box">
+              <div className="email-container">
+                {result.email_draft}
+              </div>
             </div>
           </div>
 
@@ -446,10 +441,10 @@ export default function MeetingAnalysis({ result, onBack }) {
                 color: "var(--text-primary)"
               }}
             >
-              <span style={{ display: "flex", alignItems: "center", gap: "10px", fontWeight: 700 }}>
-                <FileText size={18} style={{ color: "var(--text-secondary)" }} /> Raw Transcript
+              <span style={{ display: "flex", alignItems: "center", gap: "12px", fontWeight: 700, fontSize: "1.05rem" }}>
+                <FileText size={20} style={{ color: "var(--text-secondary)" }} /> Raw Transcript
               </span>
-              {expandedTranscript ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              {expandedTranscript ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
             </button>
 
             {expandedTranscript && (
@@ -457,16 +452,17 @@ export default function MeetingAnalysis({ result, onBack }) {
                 className="animate-fade-in"
                 style={{
                   marginTop: "20px",
-                  background: "rgba(15, 23, 42, 0.5)",
+                  background: "rgba(6, 9, 20, 0.8)",
                   border: "1px solid var(--border-translucent)",
-                  borderRadius: "10px",
-                  padding: "16px",
-                  fontSize: "0.85rem",
-                  lineHeight: 1.7,
-                  maxHeight: "320px",
+                  borderRadius: "12px",
+                  padding: "20px",
+                  fontSize: "0.88rem",
+                  lineHeight: 1.75,
+                  maxHeight: "340px",
                   overflowY: "auto",
                   fontFamily: "monospace",
-                  color: "var(--text-secondary)"
+                  color: "var(--text-secondary)",
+                  boxShadow: "inset 0 2px 10px rgba(0,0,0,0.4)"
                 }}
               >
                 {/* Parse speaker lines and color-code speaker tags */}
@@ -479,15 +475,15 @@ export default function MeetingAnalysis({ result, onBack }) {
                       // Alternate speaker colors
                       const speakerColor = speaker.toLowerCase().includes("a") || speaker.includes("1")
                         ? "var(--text-cyan)"
-                        : "var(--accent-purple)";
+                        : "var(--text-purple)";
                       return (
-                        <div key={idx} style={{ marginBottom: "10px" }}>
-                          <span style={{ color: speakerColor, fontWeight: "bold" }}>{speaker}:</span>
+                        <div key={idx} style={{ marginBottom: "12px" }}>
+                          <span style={{ color: speakerColor, fontWeight: 700, marginRight: "6px" }}>{speaker}:</span>
                           <span style={{ color: "var(--text-primary)" }}>{text}</span>
                         </div>
                       );
                     }
-                    return <div key={idx} style={{ marginBottom: "6px" }}>{line}</div>;
+                    return <div key={idx} style={{ marginBottom: "8px" }}>{line}</div>;
                   })
                 ) : (
                   <p style={{ color: "var(--text-muted)" }}>No transcript text available.</p>

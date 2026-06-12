@@ -103,16 +103,28 @@ export default function AskMemory() {
       display: "flex",
       flexDirection: "column",
       height: "calc(100vh - 120px)",
-      minHeight: "550px",
-      padding: "24px",
+      minHeight: "560px",
+      padding: "28px 24px",
       overflow: "hidden"
     }}>
       {/* Tab Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", borderBottom: "1px solid var(--border-translucent)", paddingBottom: "16px", marginBottom: "20px" }}>
-        <Search size={22} style={{ color: "var(--accent-cyan)" }} />
+      <div style={{ display: "flex", alignItems: "center", gap: "14px", borderBottom: "1px solid var(--border-translucent)", paddingBottom: "18px", marginBottom: "22px" }}>
+        <div style={{
+          background: "rgba(6, 182, 212, 0.08)",
+          borderRadius: "10px",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "var(--accent-cyan)",
+          border: "1px solid rgba(6, 182, 212, 0.15)"
+        }}>
+          <Search size={20} />
+        </div>
         <div>
-          <h2>Ask Memory</h2>
-          <p style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>Ask questions across all saved meetings using vector embeddings</p>
+          <h2 style={{ fontSize: "1.4rem", fontWeight: 750 }}>Ask Memory</h2>
+          <p style={{ fontSize: "0.82rem", color: "var(--text-muted)" }}>Ask questions across all saved meetings using vector embeddings</p>
         </div>
       </div>
 
@@ -122,9 +134,9 @@ export default function AskMemory() {
         overflowY: "auto",
         display: "flex",
         flexDirection: "column",
-        gap: "20px",
+        gap: "24px",
         paddingRight: "8px",
-        marginBottom: "20px"
+        marginBottom: "24px"
       }}>
         {messages.map((msg) => {
           const isUser = msg.role === "user";
@@ -133,11 +145,12 @@ export default function AskMemory() {
               key={msg.id}
               style={{
                 display: "flex",
-                gap: "12px",
+                gap: "14px",
                 flexDirection: isUser ? "row-reverse" : "row",
                 alignItems: "flex-start",
                 maxWidth: "85%",
-                alignSelf: isUser ? "flex-end" : "flex-start"
+                alignSelf: isUser ? "flex-end" : "flex-start",
+                animation: "slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards"
               }}
             >
               {/* Avatar */}
@@ -145,51 +158,53 @@ export default function AskMemory() {
                 width: "36px",
                 height: "36px",
                 borderRadius: "50%",
-                background: isUser ? "var(--accent-cyan-glow)" : "rgba(168, 85, 247, 0.1)",
+                background: isUser ? "var(--accent-cyan-glow)" : "rgba(139, 92, 246, 0.08)",
                 border: "1px solid",
                 borderColor: isUser ? "var(--accent-cyan)" : "var(--accent-purple)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                color: isUser ? "var(--text-primary)" : "var(--accent-purple)",
-                flexShrink: 0
+                color: isUser ? "var(--text-cyan)" : "var(--text-purple)",
+                flexShrink: 0,
+                boxShadow: isUser ? "0 0 10px rgba(6, 182, 212, 0.1)" : "0 0 10px rgba(139, 92, 246, 0.1)"
               }}>
                 {isUser ? <User size={18} /> : <Bot size={18} />}
               </div>
 
               {/* Bubble */}
               <div style={{
-                padding: "16px 20px",
-                borderRadius: isUser ? "18px 4px 18px 18px" : "4px 18px 18px 18px",
-                background: isUser ? "rgba(6, 182, 212, 0.08)" : "rgba(255, 255, 255, 0.02)",
+                padding: "16px 22px",
+                borderRadius: isUser ? "20px 4px 20px 20px" : "4px 20px 20px 20px",
+                background: isUser ? "rgba(6, 182, 212, 0.05)" : "rgba(255, 255, 255, 0.015)",
                 border: "1px solid",
                 borderColor: msg.isError
-                  ? "rgba(239, 68, 68, 0.2)"
+                  ? "rgba(239, 68, 68, 0.25)"
                   : isUser
-                    ? "rgba(6, 182, 212, 0.15)"
+                    ? "rgba(6, 182, 212, 0.18)"
                     : "var(--border-translucent)",
                 color: msg.isError ? "var(--color-danger)" : "var(--text-primary)",
                 fontSize: "0.95rem",
-                lineHeight: 1.6,
+                lineHeight: 1.65,
                 whiteSpace: "pre-wrap",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
+                boxShadow: "0 4px 15px rgba(0, 0, 0, 0.25)"
               }}>
                 {msg.content}
 
                 {/* Visual quote/source reference highlighting if text has references */}
                 {!isUser && msg.content.includes("Meeting ID:") && (
                   <div style={{
-                    marginTop: "12px",
+                    marginTop: "14px",
                     paddingTop: "12px",
                     borderTop: "1px dashed var(--border-translucent)",
-                    fontSize: "0.8rem",
+                    fontSize: "0.78rem",
                     color: "var(--text-muted)",
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px"
+                    gap: "8px",
+                    fontWeight: 500
                   }}>
-                    <CornerDownRight size={12} style={{ color: "var(--accent-cyan)" }} />
-                    <span>Cross-referenced from vector library</span>
+                    <CornerDownRight size={13} style={{ color: "var(--accent-cyan)" }} />
+                    <span style={{ color: "var(--text-cyan)", letterSpacing: "0.02em" }}>Cross-referenced from vector library</span>
                   </div>
                 )}
               </div>
@@ -201,7 +216,7 @@ export default function AskMemory() {
         {loading && (
           <div style={{
             display: "flex",
-            gap: "12px",
+            gap: "14px",
             alignItems: "flex-start",
             maxWidth: "85%",
             alignSelf: "flex-start"
@@ -210,7 +225,7 @@ export default function AskMemory() {
               width: "36px",
               height: "36px",
               borderRadius: "50%",
-              background: "rgba(168, 85, 247, 0.1)",
+              background: "rgba(139, 92, 246, 0.08)",
               border: "1px solid var(--accent-purple)",
               display: "flex",
               alignItems: "center",
@@ -223,16 +238,26 @@ export default function AskMemory() {
 
             <div style={{
               padding: "16px 24px",
-              borderRadius: "4px 18px 18px 18px",
+              borderRadius: "4px 20px 20px 20px",
               background: "rgba(255, 255, 255, 0.01)",
               border: "1px solid var(--border-translucent)",
               display: "flex",
               alignItems: "center",
-              gap: "8px",
+              gap: "10px",
               color: "var(--text-secondary)",
-              fontSize: "0.9rem"
+              fontSize: "0.92rem",
+              fontWeight: 500
             }}>
-              <span>MeetMind is searching vector DB...</span>
+              <span style={{
+                width: "6px",
+                height: "6px",
+                borderRadius: "50%",
+                background: "var(--accent-cyan)",
+                display: "inline-block",
+                boxShadow: "0 0 6px var(--accent-cyan)",
+                animation: "pulseGlowPurple 1s infinite"
+              }} />
+              <span>MeetMind is searching vector database...</span>
             </div>
           </div>
         )}
@@ -244,25 +269,26 @@ export default function AskMemory() {
         <div style={{
           display: "flex",
           flexDirection: "column",
-          gap: "8px",
-          marginBottom: "16px",
-          animation: "fadeIn 0.5s ease"
+          gap: "10px",
+          marginBottom: "20px",
+          animation: "slideUpFade 0.5s ease"
         }}>
-          <span style={{ fontSize: "0.8rem", color: "var(--text-muted)", fontWeight: 600 }}>SUGGESTIONS:</span>
+          <span style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontWeight: 700, letterSpacing: "0.08em" }}>SUGGESTED RETRIEVALS:</span>
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             {suggestionChips.map((chip, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSend(chip)}
                 style={{
-                  padding: "8px 14px",
-                  borderRadius: "20px",
+                  padding: "10px 16px",
+                  borderRadius: "24px",
                   border: "1px solid var(--border-translucent)",
-                  background: "rgba(255, 255, 255, 0.02)",
+                  background: "rgba(255, 255, 255, 0.015)",
                   color: "var(--text-secondary)",
-                  fontSize: "0.85rem",
+                  fontSize: "0.86rem",
+                  fontWeight: 550,
                   cursor: "pointer",
-                  transition: "all 0.2s ease",
+                  transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
                   textAlign: "left"
                 }}
                 className="glass-panel-hover"
@@ -289,12 +315,16 @@ export default function AskMemory() {
           disabled={loading}
           style={{
             flexGrow: 1,
-            borderRadius: "14px",
-            minHeight: "50px",
-            maxHeight: "100px",
-            padding: "14px 50px 14px 16px",
+            borderRadius: "16px",
+            minHeight: "56px",
+            maxHeight: "120px",
+            padding: "16px 60px 16px 18px",
             resize: "none",
-            lineHeight: 1.4
+            lineHeight: 1.5,
+            fontSize: "0.96rem",
+            background: "rgba(8, 12, 26, 0.95)",
+            boxShadow: "inset 0 2px 8px rgba(0, 0, 0, 0.4)",
+            border: "1px solid var(--border-translucent)"
           }}
         />
         <button
@@ -303,15 +333,16 @@ export default function AskMemory() {
           disabled={loading || !input.trim()}
           style={{
             position: "absolute",
-            right: "8px",
-            top: "8px",
-            width: "34px",
-            height: "34px",
+            right: "10px",
+            top: "10px",
+            width: "36px",
+            height: "36px",
             padding: 0,
-            borderRadius: "10px",
+            borderRadius: "12px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            boxShadow: "0 0 10px var(--accent-cyan-glow)"
           }}
         >
           <Send size={16} />
