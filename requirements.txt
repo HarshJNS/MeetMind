@@ -1,0 +1,13 @@
+assemblyai
+chromadb
+fastapi
+google-generativeai
+openai-whisper
+pydantic
+pydub
+python-dotenv
+python-multipart
+requests
+streamlit
+torch
+uvicorn[standard]

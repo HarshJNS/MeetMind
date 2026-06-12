@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: meetmind-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-cloud.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ASSEMBLYAI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_FALLBACK_MODELS
+        value: gemini-2.5-flash-lite,gemini-flash-latest,gemini-2.0-flash
+      - key: GEMINI_EMBEDDING_MODEL
+        value: models/gemini-embedding-001
+      - key: GEMINI_EMBEDDING_FALLBACK_MODELS
+        value: models/gemini-embedding-2,models/gemini-embedding-2-preview
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
