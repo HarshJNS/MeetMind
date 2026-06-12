@@ -1,5 +1,20 @@
 import { useState, useEffect } from "react";
-import { PlusCircle, Search, History, Brain, Radio, AlertTriangle } from "lucide-react";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Brain,
+  CheckCircle2,
+  Database,
+  History,
+  Mail,
+  Mic,
+  PlayCircle,
+  PlusCircle,
+  Radio,
+  Search,
+  SearchCheck,
+  ShieldCheck,
+} from "lucide-react";
 import NewMeeting from "./components/NewMeeting";
 import MeetingAnalysis from "./components/MeetingAnalysis";
 import AskMemory from "./components/AskMemory";
@@ -7,6 +22,9 @@ import MeetingHistory from "./components/MeetingHistory";
 import { API_BASE_URL, apiUrl } from "./api";
 
 export default function App() {
+  const [showLanding, setShowLanding] = useState(() => {
+    return localStorage.getItem("meetmind:enteredApp") !== "true";
+  });
   const [activeTab, setActiveTab] = useState("new"); // 'new', 'ask', 'history'
   const [latestResult, setLatestResult] = useState(null);
   const [selectedMeetingId, setSelectedMeetingId] = useState(null);
@@ -83,6 +101,15 @@ export default function App() {
     setActiveTab("new");
   };
 
+  const enterApp = () => {
+    localStorage.setItem("meetmind:enteredApp", "true");
+    setShowLanding(false);
+  };
+
+  if (showLanding) {
+    return <LandingPage onEnterApp={enterApp} />;
+  }
+
   return (
     <div className="app-container">
 
@@ -121,6 +148,17 @@ export default function App() {
         </div>
 
         <nav className="nav-menu">
+          <button
+            className="nav-item"
+            onClick={() => {
+              localStorage.removeItem("meetmind:enteredApp");
+              setShowLanding(true);
+            }}
+            type="button"
+          >
+            <PlayCircle size={18} />
+            <span>Landing Page</span>
+          </button>
           <div
             className={`nav-item ${activeTab === "new" && !selectedMeetingId && !latestResult ? "active" : ""}`}
             onClick={() => {
@@ -357,6 +395,165 @@ export default function App() {
         )}
       </main>
 
+    </div>
+  );
+}
+
+function LandingPage({ onEnterApp }) {
+  const features = [
+    {
+      icon: <Mic size={20} />,
+      title: "Record or Upload",
+      body: "Capture a live meeting, upload audio, or paste an existing transcript without leaving the workspace.",
+    },
+    {
+      icon: <CheckCircle2 size={20} />,
+      title: "Accountability Extraction",
+      body: "MeetMind turns messy conversation into decisions, owners, deadlines, and unresolved questions.",
+    },
+    {
+      icon: <Database size={20} />,
+      title: "Searchable Memory",
+      body: "Every meeting becomes searchable memory, so teams can ask what was decided weeks later.",
+    },
+    {
+      icon: <Mail size={20} />,
+      title: "Follow-up Drafts",
+      body: "Generate a concise follow-up email so action items do not disappear after the call ends.",
+    },
+  ];
+
+  const workflow = [
+    "Capture meeting audio or transcript",
+    "Extract decisions and accountable action items",
+    "Save structured history and vector memory",
+    "Ask questions across every saved meeting",
+  ];
+
+  return (
+    <div className="landing-shell">
+      <section className="landing-hero">
+        <div className="landing-hero-bg" aria-hidden="true" />
+        <div className="landing-hero-overlay" aria-hidden="true" />
+
+        <header className="landing-nav">
+          <div className="landing-brand">
+            <span className="landing-brand-mark">
+              <Brain size={22} />
+            </span>
+            <span>MeetMind</span>
+          </div>
+          <button className="landing-nav-cta" onClick={onEnterApp} type="button">
+            Open Dashboard
+          </button>
+        </header>
+
+        <div className="landing-hero-content">
+          <p className="landing-eyebrow">AI meeting accountability layer</p>
+          <h1>Turn every meeting into decisions, owners, and searchable memory.</h1>
+          <p className="landing-hero-copy">
+            MeetMind records or analyzes meetings, extracts what matters, drafts follow-ups,
+            and lets your team ask plain-English questions across the full meeting history.
+          </p>
+          <div className="landing-actions">
+            <button className="landing-primary" onClick={onEnterApp} type="button">
+              Launch MeetMind <ArrowRight size={18} />
+            </button>
+            <button className="landing-secondary" onClick={onEnterApp} type="button">
+              <PlayCircle size={18} /> Try Demo Flow
+            </button>
+          </div>
+        </div>
+
+        <div className="landing-hero-strip">
+          <div>
+            <strong>3</strong>
+            <span>Input modes</span>
+          </div>
+          <div>
+            <strong>RAG</strong>
+            <span>Meeting memory</span>
+          </div>
+          <div>
+            <strong>JSON</strong>
+            <span>Structured extraction</span>
+          </div>
+          <div>
+            <strong>Email</strong>
+            <span>Drafted follow-ups</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="landing-section landing-product-section">
+        <div className="landing-section-copy">
+          <p className="landing-eyebrow">Built for operators</p>
+          <h2>The dashboard starts where normal transcribers stop.</h2>
+          <p>
+            Transcripts are useful, but accountability is the real business value. MeetMind
+            keeps the transcript, then adds decisions, ownership, unanswered questions, and recall.
+          </p>
+        </div>
+        <div className="landing-preview" aria-label="MeetMind product preview">
+          <div className="preview-sidebar">
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="preview-main">
+            <div className="preview-topline" />
+            <div className="preview-cards">
+              <div />
+              <div />
+              <div />
+            </div>
+            <div className="preview-panel">
+              <div className="preview-row long" />
+              <div className="preview-row" />
+              <div className="preview-row short" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="landing-section landing-feature-grid">
+        {features.map((feature) => (
+          <article className="landing-feature-card" key={feature.title}>
+            <span>{feature.icon}</span>
+            <h3>{feature.title}</h3>
+            <p>{feature.body}</p>
+          </article>
+        ))}
+      </section>
+
+      <section className="landing-section landing-workflow">
+        <div>
+          <p className="landing-eyebrow">Workflow</p>
+          <h2>From meeting chaos to accountable memory in one pass.</h2>
+        </div>
+        <div className="workflow-list">
+          {workflow.map((step, index) => (
+            <div className="workflow-step" key={step}>
+              <strong>{String(index + 1).padStart(2, "0")}</strong>
+              <span>{step}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="landing-section landing-final">
+        <div>
+          <SearchCheck size={34} />
+          <h2>Ready to demo the memory layer?</h2>
+          <p>
+            Open the dashboard, analyze a meeting, then ask what was decided. That is the moment
+            MeetMind stops feeling like a summarizer and starts feeling like company memory.
+          </p>
+        </div>
+        <button className="landing-primary" onClick={onEnterApp} type="button">
+          Open Dashboard <ShieldCheck size={18} />
+        </button>
+      </section>
     </div>
   );
 }
