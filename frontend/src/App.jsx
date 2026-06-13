@@ -140,7 +140,7 @@ export default function App() {
             <Brain size={22} style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.2))" }} />
           </div>
           <div>
-            <h1 style={{ fontSize: "1.35rem", margin: 0, fontWeight: 900, letterSpacing: "-0.03em" }}>MeetMind</h1>
+            <h1 style={{ fontSize: "1.35rem", margin: 0, fontWeight: 900, letterSpacing: "-0.03em", border: 0, padding: 0 }}>MeetMind</h1>
             <p style={{ fontSize: "0.68rem", color: "var(--text-muted)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
               AI Intelligence
             </p>
