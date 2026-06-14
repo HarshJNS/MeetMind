@@ -199,7 +199,7 @@ export default function App() {
           </div>
         </nav>
 
-        {/* User profile section widget (adds premium look) */}
+        {/* Project owner section */}
         <div style={{
           background: "linear-gradient(to bottom, rgba(255,255,255,0.01), rgba(255,255,255,0.03))",
           border: "1px solid var(--border-translucent)",
@@ -222,11 +222,27 @@ export default function App() {
             fontWeight: "bold",
             color: "#fff"
           }}>
-            DW
+            HR
           </div>
           <div style={{ overflow: "hidden" }}>
-            <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>Demo Workspace</div>
-            <div style={{ fontSize: "0.68rem", color: "var(--text-muted)", whiteSpace: "nowrap" }}>meetmind@demo</div>
+            <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--text-primary)", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>Harsh Raj</div>
+            <a
+              href="https://github.com/HarshJNS"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                fontSize: "0.68rem",
+                color: "var(--text-muted)",
+                whiteSpace: "nowrap",
+                textDecoration: "none"
+              }}
+            >
+              <span aria-hidden="true">GH</span>
+              @HarshJNS
+            </a>
           </div>
         </div>
 
@@ -296,6 +312,14 @@ export default function App() {
               <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", fontWeight: 500 }}>DIAGNOSTIC CHECK...</span>
             </div>
           )}
+        </div>
+        <div style={{
+          marginTop: "12px",
+          fontSize: "0.68rem",
+          lineHeight: 1.5,
+          color: "var(--text-muted)"
+        }}>
+          © 2026 Harsh Raj. All rights reserved.
         </div>
       </aside>
 
@@ -575,6 +599,14 @@ function LandingPage({ onEnterApp }) {
           Open Dashboard <ShieldCheck size={18} />
         </button>
       </section>
+
+      <footer className="landing-footer">
+        <span>© 2026 Harsh Raj. All rights reserved.</span>
+        <a href="https://github.com/HarshJNS" target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">GH</span>
+          GitHub: @HarshJNS
+        </a>
+      </footer>
     </div>
   );
 }
