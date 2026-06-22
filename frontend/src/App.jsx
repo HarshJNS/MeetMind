@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import {
   AlertTriangle,
   ArrowRight,
-  Brain,
   CheckCircle2,
   Database,
   History,
@@ -22,6 +21,8 @@ import MeetingAnalysis from "./components/MeetingAnalysis";
 import AskMemory from "./components/AskMemory";
 import MeetingHistory from "./components/MeetingHistory";
 import { API_BASE_URL, apiUrl } from "./api";
+
+const LOGO_SRC = "/meetmind-mark.png";
 
 export default function App() {
   const [showLanding, setShowLanding] = useState(() => {
@@ -111,7 +112,7 @@ export default function App() {
         {/* Brand */}
         <div className="mm-brand">
           <div className="mm-brand-icon">
-            <Brain size={20} />
+            <img src={LOGO_SRC} alt="" />
           </div>
           <div>
             <span className="mm-brand-name">MeetMind</span>
@@ -312,7 +313,7 @@ function LandingPage({ onEnterApp }) {
       <nav className="lp-nav">
         <div className="lp-nav-inner">
           <div className="lp-logo">
-            <div className="lp-logo-mark"><Brain size={20} /></div>
+            <div className="lp-logo-mark"><img src={LOGO_SRC} alt="" /></div>
             <span>MeetMind</span>
           </div>
           <button className="lp-nav-btn" onClick={onEnterApp} type="button">
